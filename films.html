@@ -28,29 +28,30 @@
             text-decoration: underline;
         }
         main {
-            max-width: 1200px;
+            max-width: 800px;
             margin: 50px auto;
             padding: 0 20px;
+            text-align: center;
         }
         h1 {
             font-size: 2em;
         }
         .film-container {
-            display: flex;
-            flex-direction: column;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
             gap: 30px;
+            justify-content: center;
         }
         .film-card {
-            display: flex;
-            align-items: center;
             background-color: #222;
             border-radius: 10px;
             overflow: hidden;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             cursor: pointer;
+            text-align: left;
         }
         .film-card img {
-            width: 150px;
+            width: 100%;
             height: auto;
         }
         .film-card-content {
@@ -58,7 +59,7 @@
         }
         .film-card h3 {
             margin: 0;
-            font-size: 1.5em;
+            font-size: 1.2em;
         }
         .film-card p {
             margin: 10px 0;
@@ -81,6 +82,21 @@
         .date {
             color: #aaa;
             margin-bottom: 10px;
+        }
+        .pagination {
+            margin-top: 30px;
+        }
+        .pagination button {
+            background-color: #444;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            cursor: pointer;
+            margin: 0 5px;
+        }
+        .pagination button:hover {
+            background-color: #555;
         }
     </style>
 </head>
@@ -138,6 +154,10 @@
                     <a href="film-details.html?film=BlueValentine" class="watchlist">+ Watchlist</a>
                 </div>
             </div>
+        </div>
+
+        <div class="pagination">
+            <button onclick="window.location.href='films-page2.html'">Previous Films</button>
         </div>
     </main>
 </body>
