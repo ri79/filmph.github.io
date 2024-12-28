@@ -37,12 +37,22 @@
         }
 
         main {
+            display: flex;
             padding: 20px;
-            max-width: 800px;
+            max-width: 1200px;
             margin: 80px auto; /* Adjusted top margin */
             background-color: #181818; /* Slightly lighter background for the content */
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Add a more prominent shadow */
             border-radius: 10px; /* Rounded corners */
+        }
+
+        .sidebar {
+            width: 20%;
+            padding-right: 20px;
+        }
+
+        .content {
+            width: 80%;
         }
 
         h1 {
@@ -78,6 +88,9 @@
             position: fixed;
             width: 100%;
             bottom: 0;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
         }
 
         footer p {
@@ -97,14 +110,29 @@
         </nav>
     </header>
     <main>
-        <h1>I'm getting bookmarksss</h1>
-        <p>I do independent research, machine learning, investing, programming, and other creative work.</p>
-        <p>Most of my work revolves around AI, longevity, biology, VR, infosec, finance, music theory, UX, anime, meta-rationality, memetics, and epistemology.</p>
-        <p>It seems like the most impactful field right now is AI. Longevity, bioengineering, coordination mechanisms, and VR/AR are also really exciting this decade.</p>
-        <p>If you're reading this, feel free to send me a message anywhere you see me! You can DM me on <a href="https://twitter.com">Twitter</a> or email me at near at this domain. This page was last updated on [date].</p>
-        <p><strong>This Blog</strong></p>
+        <div class="sidebar">
+            <h1>Navigation</h1>
+            <nav>
+                <a href="/index">Home</a>
+                <a href="/films">Films</a>
+                <a href="/interviews">Interviews</a>
+                <a href="/links">Links</a>
+            </nav>
+        </div>
+        <div class="content">
+            <h1>I'm getting bookmarksss</h1>
+            <p>I do independent research, machine learning, investing, programming, and other creative work.</p>
+            <p>Most of my work revolves around AI, longevity, biology, VR, infosec, finance, music theory, UX, anime, meta-rationality, memetics, and epistemology.</p>
+            <p>It seems like the most impactful field right now is AI. Longevity, bioengineering, coordination mechanisms, and VR/AR are also really exciting this decade.</p>
+            <p>If you're reading this, feel free to send me a message anywhere you see me! You can DM me on <a href="https://twitter.com">Twitter</a> or email me at near at this domain. This page was last updated on [date].</p>
+            <p><strong>This Blog</strong></p>
+        </div>
     </main>
     <footer>
+        <a href="/index">Home</a>
+        <a href="/films">Films</a>
+        <a href="/interviews">Interviews</a>
+        <a href="/links">Links</a>
         <p>&copy; 2024 Your Name. All rights reserved.</p>
     </footer>
 </body>
