@@ -1,33 +1,76 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Kişisel müzik, film, fotoğraf, kitap ve link koleksiyonu">
+    <meta name="keywords" content="bookmarks, müzik, film, fotoğraf, kitap, link">
+    <meta name="theme-color" content="#111111">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="canonical" href="your-site-url" />
     <title>bookmarkss</title>
     <style>
+        :root {
+            --background-color: #111111;
+            --text-color: #ffffff;
+            --secondary-bg: #181818;
+            --accent-color: #3498db;
+            --border-color: #333;
+            --nav-hover-bg: #333;
+            --text-secondary: #aaa;
+            --box-shadow: rgba(0, 0, 0, 0.5);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
-            background-color: #111111;
-            color: #ffffff;
+            background-color: var(--background-color);
+            color: var(--text-color);
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
             margin: 0;
             padding: 0;
-            min-height: 100vh;
             display: flex;
             flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .skip-nav {
+            position: absolute;
+            left: -9999px;
+            z-index: 999;
+            padding: 1em;
+            background-color: var(--accent-color);
+            color: var(--text-color);
+            text-decoration: none;
+        }
+
+        .skip-nav:focus {
+            left: 50%;
+            transform: translateX(-50%);
         }
 
         nav {
             display: flex;
             gap: 15px;
-            padding: 8px 0;
-            margin-bottom: 14px;
+            padding: 8px 20px;
+            margin-bottom: 20px;
             justify-content: flex-start;
-            padding-left: 20px;
-            border-bottom: 2px solid #333;
+            border-bottom: 2px solid var(--border-color);
+            width: 100%;
+            max-width: 1200px;
+            box-sizing: border-box;
         }
 
         nav a {
-            color: #ffffff;
+            color: var(--text-color);
             text-decoration: none;
             font-size: 16px;
             text-transform: lowercase;
@@ -37,24 +80,31 @@
         }
 
         nav a:hover {
-            background-color: #333;
+            background-color: var(--nav-hover-bg);
             text-decoration: none;
+        }
+
+        nav a[aria-current="page"] {
+            background-color: var(--nav-hover-bg);
+            font-weight: bold;
         }
 
         main {
             display: flex;
             flex-direction: column;
             padding: 20px;
+            width: 100%;
             max-width: 1200px;
-            margin: 60px auto 20px auto;
-            background-color: #181818;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            margin-bottom: 20px;
+            background-color: var(--secondary-bg);
+            box-shadow: 0 0 10px var(--box-shadow);
             border-radius: 10px;
-            flex: 1;
+            box-sizing: border-box;
+            opacity: 0;
+            transition: opacity 0.3s ease-in;
         }
 
         main.homepage {
-            justify-content: center;
             align-items: center;
             text-align: center;
         }
@@ -71,10 +121,9 @@
         #changing-word {
             font-size: 1em;
             margin-left: 10px;
-            color: #aaa;
+            color: var(--text-secondary);
         }
 
-        /* Diğer sayfaların başlık ve paragraf stilleri */
         h1 {
             font-size: 32px;
             margin-bottom: 20px;
@@ -88,60 +137,174 @@
         }
 
         a {
-            color: #3498db;
+            color: var(--accent-color);
             text-decoration: none;
         }
 
         a:hover {
             text-decoration: underline;
         }
+
+        .loading {
+            display: none;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .loading.active {
+            display: flex;
+        }
+
+        @media (min-width: 768px) {
+            body {
+                padding: 20px;
+            }
+
+            nav {
+                margin-bottom: 30px;
+            }
+
+            main {
+                margin-bottom: 30px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+
+            * {
+                transition: none !important;
+            }
+        }
+
+        @media (prefers-color-scheme: light) {
+            :root {
+                --background-color: #ffffff;
+                --text-color: #000000;
+                --secondary-bg: #f5f5f5;
+                --border-color: #dddddd;
+                --nav-hover-bg: #eeeeee;
+                --text-secondary: #666666;
+                --box-shadow: rgba(0, 0, 0, 0.1);
+            }
+        }
     </style>
 </head>
 <body>
-    <main>
-        <nav>
-            <a href="/">anasayfa</a>
-            <a href="/muzik">müzik</a>
-            <a href="/film">film</a>
-            <a href="/fotograf">fotoğraf</a>
-            <a href="/kitap">kitap</a>
-            <a href="/link">link</a>
-        </nav>
+    <a href="#main-content" class="skip-nav">Ana içeriğe geç</a>
+    <nav role="navigation" aria-label="Ana navigasyon">
+        <a href="/" aria-current="page">anasayfa</a>
+        <a href="/muzik">müzik</a>
+        <a href="/film">film</a>
+        <a href="/fotograf">fotoğraf</a>
+        <a href="/kitap">kitap</a>
+        <a href="/link">link</a>
+    </nav>
+    <main id="main-content" class="homepage">
+        <div class="loading">Yükleniyor...</div>
         <div class="content">
+            <div id="homepage-text">
+                Her gün <span id="changing-word"></span>
             </div>
+        </div>
     </main>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const mainElement = document.querySelector('main');
-            const contentDiv = document.querySelector('.content');
+            try {
+                const mainElement = document.querySelector('main');
+                const contentDiv = document.querySelector('.content');
+                const loadingDiv = document.querySelector('.loading');
 
-            if (window.location.pathname === '/') {
-                mainElement.classList.add('homepage');
-                contentDiv.innerHTML = `
-                    <div id="homepage-text">
-                        Her gün <span id="changing-word"></span>
-                    </div>
-                `;
-
-                const changingWordElement = document.getElementById('changing-word');
-                const words = ['müzik', 'film', 'fotoğraf', 'kitap', 'link'];
-                let wordIndex = 0;
-
-                function changeWord() {
-                    changingWordElement.textContent = words[wordIndex];
-                    wordIndex = (wordIndex + 1) % words.length;
+                if (!mainElement || !contentDiv || !loadingDiv) {
+                    throw new Error('Required elements not found');
                 }
 
-                changeWord(); // İlk kelimeyi ayarla
-                setInterval(changeWord, 5000); // Her 5 saniyede bir kelimeyi değiştir
-            } else {
-                mainElement.classList.remove('homepage');
-                contentDiv.innerHTML = `
-                    <h1>${document.title}</h1>
-                    <p>Bu sayfanın içeriği buraya gelecek.</p>
-                `;
+                // Show loading state
+                loadingDiv.classList.add('active');
+
+                // Fade in main content
+                function fadeIn(element) {
+                    element.style.opacity = 0;
+                    element.style.transition = 'opacity 0.3s ease-in';
+                    setTimeout(() => element.style.opacity = 1, 10);
+                }
+
+                if (window.location.pathname === '/') {
+                    mainElement.classList.add('homepage');
+                    const homepageTextDiv = document.createElement('div');
+                    homepageTextDiv.id = 'homepage-text';
+                    homepageTextDiv.innerHTML = `
+                        Her gün <span id="changing-word"></span>
+                    `;
+                    contentDiv.appendChild(homepageTextDiv);
+
+                    const changingWordElement = document.getElementById('changing-word');
+                    const words = ['müzik', 'film', 'fotoğraf', 'kitap', 'link'];
+                    let wordIndex = 0;
+
+                    let animationFrameId;
+                    function animate() {
+                        changingWordElement.textContent = words[wordIndex];
+                        wordIndex = (wordIndex + 1) % words.length;
+                        animationFrameId = setTimeout(() => {
+                            requestAnimationFrame(animate);
+                        }, 5000);
+                    }
+
+                    // Start animation
+                    requestAnimationFrame(animate);
+
+                    // Save last visited section
+                    localStorage.setItem('lastVisited', 'home');
+                } else {
+                    mainElement.classList.remove('homepage');
+                    contentDiv.innerHTML = `
+                        <h1>${document.title}</h1>
+                        <p>Bu sayfanın içeriği buraya gelecek.</p>
+                    `;
+
+                    // Save last visited section
+                    localStorage.setItem('lastVisited', window.location.pathname);
+                }
+
+                // Hide loading state and show content
+                setTimeout(() => {
+                    loadingDiv.classList.remove('active');
+                    fadeIn(mainElement);
+                }, 300);
+
+                // Cleanup function
+                function cleanup() {
+                    if (animationFrameId) {
+                        cancelAnimationFrame(animationFrameId);
+                        clearTimeout(animationFrameId);
+                    }
+                }
+
+                // Clean up on page unload
+                window.addEventListener('unload', cleanup);
+
+            } catch (error) {
+                console.error('Error initializing page:', error);
+                // Show error message to user
+                const errorDiv = document.createElement('div');
+                errorDiv.style.color = 'red';
+                errorDiv.textContent = 'Sayfa yüklenirken bir hata oluştu. Lütfen sayfayı yenileyin.';
+                document.body.appendChild(errorDiv);
             }
         });
+
+        // Add service worker for offline functionality
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js').catch(error => {
+                    console.error('ServiceWorker registration failed:', error);
+                });
+            });
+        }
     </script>
 </body>
 </html>
