@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>near.blog</title>
+    <title>bookmarkss</title>
     <style>
         body {
             background-color: #111111; /* Dark background */
@@ -11,82 +11,146 @@
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
             margin: 0;
             padding: 0;
+            min-height: 100vh; /* Body'nin en az viewport yüksekliği kadar olmasını sağlar */
+            display: flex;
+            flex-direction: column;
         }
 
         header {
             background-color: #111111; /* Dark header */
             padding: 10px 20px;
-            display: flex;
-            justify-content: center; /* Center the navigation links */
-            align-items: center;
+            display: none; /* Hide the header */
         }
 
         nav {
             display: flex;
-            gap: 15px;
+            gap: 15px; /* Biraz azaltılmış boşluk */
+            padding: 8px 0; /* Biraz azaltılmış üst ve alt boşluk */
+            margin-bottom: 14px; /* Ana içerikle arasına boşluk */
+            justify-content: flex-start; /* Sola yasla */
+            padding-left: 20px; /* Sol boşluk */
+            border-bottom: 2px solid #333; /* Çizgi tüm genişliği kapsayacak */
         }
 
         nav a {
             color: #ffffff;
             text-decoration: none;
-            font-size: 16px; /* Increased font size */
+            font-size: 16px; /* Biraz daha küçük font */
+            /* font-weight: bold; Kalın font kaldırıldı */
+            text-transform: lowercase; /* Baş harfleri küçük yap */
+            transition: background-color 0.3s ease; /* Hoş bir geçiş efekti */
+            padding: 5px 10px; /* Tıklanabilir alanı artır ve görsel denge sağla */
+            border-radius: 5px 5px 0 0; /* Üst köşeleri yuvarla */
         }
 
         nav a:hover {
-            text-decoration: underline;
+            background-color: #333; /* Chrome sekmesi gibi arka plan rengi değişimi */
+            text-decoration: none; /* Hoverda alt çizgiyi kaldır */
         }
 
         main {
+            display: flex;
+            flex-direction: column;
             padding: 20px;
-            max-width: 700px;
-            margin: 60px auto; /* Adjusted top margin */
+            max-width: 1200px;
+            margin: 60px auto 20px auto; /* Alt boşluğu ayarlandı */
             background-color: #181818; /* Slightly lighter background for the content */
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Add a subtle shadow */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Add a more prominent shadow */
+            border-radius: 10px; /* Rounded corners */
+            flex: 1; /* Main'in kalan alanı kaplamasını sağlar */
+            justify-content: center; /* İçeriği dikeyde ortala */
+            align-items: center; /* İçeriği yatayda ortala */
+            text-align: center; /* Metni ortala */
+        }
+
+        .content {
+            width: 100%;
+        }
+
+        #homepage-text {
+            font-size: 4em; /* Çok büyük yazı */
+            white-space: nowrap; /* Metnin tek satırda kalmasını sağlar */
+        }
+
+        #changing-word {
+            font-size: 1em;
+            margin-left: 10px;
+            color: #aaa; /* Daha hafif bir renk */
         }
 
         h1 {
-            font-size: 28px;
-            margin-bottom: 15px;
-            font-weight: bold;
+            font-size: 32px;
+            margin-bottom: 20px;
+            /* font-weight: bold;  Başlıklar artık kalın değil */
         }
 
         p {
-            line-height: 1.5;
-            margin-bottom: 12px;
-            font-size: 16px;
-            color: #f0f0f0;
+            line-height: 1.6;
+            margin-bottom: 15px;
+            font-size: 18px;
+            color: #e0e0e0;
         }
 
         a {
-            color: #3498db; /* Link color */
-            text-decoration: none;
+            color: #3498db; /* Genel link rengi */
+            text-decoration: none; /* Genel linklerde alt çizgi yok */
         }
 
         a:hover {
-            text-decoration: underline;
+            text-decoration: underline; /* Genel linklerde hoverda alt çizgi */
         }
 
         strong {
             font-weight: bold;
         }
+        /* Footer stilleri kaldırıldı */
     </style>
 </head>
 <body>
-    <header>
-        <nav>
-            <a href="/index">Home</a>
-            <a href="/films">Films</a>
-            <a href="/interviews">Interviews</a>
-            <a href="/links">Links</a>
-        </nav>
-    </header>
     <main>
-        <h1> I'm getting bookmarksss</h1>
-        <p>I do independent research, machine learning, investing, programming, and other creative work.</p>
-        <p>Most of my work revolves around AI, longevity, biology, VR, infosec, finance, music theory, UX, anime, meta-rationality, memetics, and epistemology.</p>
-        <p>It seems like the most impactful field right now is AI. Longevity, bioengineering, coordination mechanisms, and VR/AR are also really exciting this decade.</p>
-        <p>If you're reading this, feel free to send me a message anywhere you see me! you can DM me on <a href="https://twitter.com">Twitter</a> or email me at near at this domain. This page was last updated on Nov 17th 2024.</p>
-        <p><strong>This Blog</strong></p>
+        <nav>
+            <a href="/">anasayfa</a>
+            <a href="/muzik">müzik</a>
+            <a href="/film">film</a>
+            <a href="/fotograf">fotoğraf</a>
+            <a href="/kitap">kitap</a>
+            <a href="/link">link</a>
+        </nav>
+        <div class="content">
+            <div id="homepage-text">
+                Her gün <span id="changing-word"></span>
+            </div>
+        </div>
     </main>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            if (window.location.pathname === '/') {
+                const changingWordElement = document.getElementById('changing-word');
+                const words = ['müzik', 'film', 'fotoğraf', 'kitap', 'link'];
+                let wordIndex = 0;
+
+                function changeWord() {
+                    changingWordElement.textContent = words[wordIndex];
+                    wordIndex = (wordIndex + 1) % words.length;
+                }
+
+                // İlk kelimeyi hemen ayarla
+                changeWord();
+
+                setInterval(changeWord, 3000); // Her 3 saniyede bir kelimeyi değiştir
+            } else {
+                // Anasayfa değilse normal içeriği göster
+                const contentDiv = document.querySelector('.content');
+                contentDiv.innerHTML = `
+                    <h1>I'm getting bookmarksss</h1>
+                    <p>I do independent research, machine learning, investing, programming, and other creative work.</p>
+                    <p>Most of my work revolves around AI, longevity, biology, VR, infosec, finance, music theory, UX, anime, meta-rationality, memetics, and epistemology.</p>
+                    <p>It seems like the most impactful field right now is AI. Longevity, bioengineering, coordination mechanisms, and VR/AR are also really exciting this decade.</p>
+                    <p>If you're reading this, feel free to send me a message anywhere you see me! You can DM me on <a href="https://twitter.com">Twitter</a> or email me at near at this domain. This page was last updated on [date].</p>
+                    <p><strong>This Blog</strong></p>
+                `;
+            }
+        });
+    </script>
 </body>
 </html>
