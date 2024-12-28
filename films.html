@@ -3,162 +3,90 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Films</title>
+    <title>near.blog</title>
     <style>
         body {
-            background-color: #1a1a1a;
-            color: #eaeaea;
-            font-family: Arial, sans-serif;
+            background-color: #111111; /* Dark background */
+            color: #ffffff; /* White text */
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
             margin: 0;
             padding: 0;
         }
+
         header {
+            background-color: #111111; /* Dark header */
+            padding: 10px 20px;
             display: flex;
-            justify-content: space-between;
+            justify-content: center; /* Center the navigation links */
             align-items: center;
-            padding: 20px;
-            background-color: #111;
         }
-        header a {
-            color: #eaeaea;
+
+        nav {
+            display: flex;
+            gap: 15px;
+        }
+
+        nav a {
+            color: #ffffff;
             text-decoration: none;
-            margin: 0 10px;
+            font-size: 16px; /* Increased font size */
         }
-        header a:hover {
+
+        nav a:hover {
             text-decoration: underline;
         }
+
         main {
-            max-width: 800px;
-            margin: 50px auto;
-            padding: 0 20px;
-            text-align: center;
+            padding: 20px;
+            max-width: 700px;
+            margin: 60px auto; /* Adjusted top margin */
+            background-color: #181818; /* Slightly lighter background for the content */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Add a subtle shadow */
         }
+
         h1 {
-            font-size: 2em;
+            font-size: 28px;
+            margin-bottom: 15px;
+            font-weight: bold;
         }
-        .film-container {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 30px;
-            justify-content: center;
+
+        p {
+            line-height: 1.5;
+            margin-bottom: 12px;
+            font-size: 16px;
+            color: #f0f0f0;
         }
-        .film-card {
-            background-color: #222;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            cursor: pointer;
-            text-align: left;
-        }
-        .film-card img {
-            width: 100%;
-            height: auto;
-        }
-        .film-card-content {
-            padding: 15px;
-        }
-        .film-card h3 {
-            margin: 0;
-            font-size: 1.2em;
-        }
-        .film-card p {
-            margin: 10px 0;
-            color: #ccc;
-        }
-        .film-card .watchlist {
-            display: inline-block;
-            margin-top: 10px;
-            padding: 10px 20px;
-            background-color: #444;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
+
+        a {
+            color: #3498db; /* Link color */
             text-decoration: none;
         }
-        .film-card .watchlist:hover {
-            background-color: #555;
+
+        a:hover {
+            text-decoration: underline;
         }
-        .date {
-            color: #aaa;
-            margin-bottom: 10px;
-        }
-        .pagination {
-            margin-top: 30px;
-        }
-        .pagination button {
-            background-color: #444;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            padding: 10px 20px;
-            cursor: pointer;
-            margin: 0 5px;
-        }
-        .pagination button:hover {
-            background-color: #555;
+
+        strong {
+            font-weight: bold;
         }
     </style>
 </head>
 <body>
     <header>
         <nav>
-            <a href="index.html">Home</a>
-            <a href="links.html">Links</a>
-            <a href="films.html">Films</a>
-            <a href="interviews.html">Interviews</a>
-            <a href="mixtapes.html">Mixtapes</a>
+            <a href="/index">Home</a>
+            <a href="/films">Films</a>
+            <a href="/interviews">Interviews</a>
+            <a href="/links">Links</a>
         </nav>
     </header>
     <main>
-        <h1>Films</h1>
-        <p>This page lists some of my favorite films, along with thoughts and notes about why they mean so much to me.</p>
-        
-        <div class="film-container">
-            <div class="film-card" onclick="window.location.href='film-details.html?film=MarriageStory'">
-                <img src="https://image.tmdb.org/t/p/w500/MarriageStoryPoster.jpg" alt="Marriage Story">
-                <div class="film-card-content">
-                    <h3>Marriage Story</h3>
-                    <p class="date">Added: Dec 25, 2024</p>
-                    <p>⭐ 7.9</p>
-                    <a href="film-details.html?film=MarriageStory" class="watchlist">+ Watchlist</a>
-                </div>
-            </div>
-
-            <div class="film-card" onclick="window.location.href='film-details.html?film=Moonlight'">
-                <img src="https://image.tmdb.org/t/p/w500/MoonlightPoster.jpg" alt="Moonlight">
-                <div class="film-card-content">
-                    <h3>Moonlight</h3>
-                    <p class="date">Added: Dec 24, 2024</p>
-                    <p>⭐ 7.4</p>
-                    <a href="film-details.html?film=Moonlight" class="watchlist">+ Watchlist</a>
-                </div>
-            </div>
-
-            <div class="film-card" onclick="window.location.href='film-details.html?film=Her'">
-                <img src="https://image.tmdb.org/t/p/w500/HerPoster.jpg" alt="Her">
-                <div class="film-card-content">
-                    <h3>Her</h3>
-                    <p class="date">Added: Dec 23, 2024</p>
-                    <p>⭐ 8.0</p>
-                    <a href="film-details.html?film=Her" class="watchlist">+ Watchlist</a>
-                </div>
-            </div>
-
-            <div class="film-card" onclick="window.location.href='film-details.html?film=BlueValentine'">
-                <img src="https://image.tmdb.org/t/p/w500/BlueValentinePoster.jpg" alt="Blue Valentine">
-                <div class="film-card-content">
-                    <h3>Blue Valentine</h3>
-                    <p class="date">Added: Dec 22, 2024</p>
-                    <p>⭐ 7.3</p>
-                    <a href="film-details.html?film=BlueValentine" class="watchlist">+ Watchlist</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="pagination">
-            <button onclick="window.location.href='films-page2.html'">Previous Films</button>
-        </div>
+        <h1> I'm getting bookmarksss</h1>
+        <p>I do independent research, machine learning, investing, programming, and other creative work.</p>
+        <p>Most of my work revolves around AI, longevity, biology, VR, infosec, finance, music theory, UX, anime, meta-rationality, memetics, and epistemology.</p>
+        <p>It seems like the most impactful field right now is AI. Longevity, bioengineering, coordination mechanisms, and VR/AR are also really exciting this decade.</p>
+        <p>If you're reading this, feel free to send me a message anywhere you see me! you can DM me on <a href="https://twitter.com">Twitter</a> or email me at near at this domain. This page was last updated on Nov 17th 2024.</p>
+        <p><strong>This Blog</strong></p>
     </main>
 </body>
 </html>
