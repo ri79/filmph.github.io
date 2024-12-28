@@ -42,6 +42,19 @@
             min-height: 100vh;
         }
 
+        .datetime-container {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background-color: var(--secondary-bg);
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 0.9em;
+            color: var(--text-secondary);
+            z-index: 1000;
+            box-shadow: 0 2px 5px var(--box-shadow);
+        }
+
         .skip-nav {
             position: absolute;
             left: -9999px;
@@ -194,6 +207,10 @@
     </style>
 </head>
 <body>
+    <div class="datetime-container">
+        <div id="current-datetime">UTC: Loading...</div>
+        <div id="user-info">User: ri79</div>
+    </div>
     <a href="#main-content" class="skip-nav">Ana içeriğe geç</a>
     <nav role="navigation" aria-label="Ana navigasyon">
         <a href="/" aria-current="page">anasayfa</a>
@@ -217,10 +234,22 @@
                 const mainElement = document.querySelector('main');
                 const contentDiv = document.querySelector('.content');
                 const loadingDiv = document.querySelector('.loading');
+                const dateTimeElement = document.getElementById('current-datetime');
 
-                if (!mainElement || !contentDiv || !loadingDiv) {
+                if (!mainElement || !contentDiv || !loadingDiv || !dateTimeElement) {
                     throw new Error('Required elements not found');
                 }
+
+                // Update datetime function
+                function updateDateTime() {
+                    const now = new Date();
+                    const utcString = now.toISOString().replace('T', ' ').slice(0, 19);
+                    dateTimeElement.textContent = `UTC: ${utcString}`;
+                }
+
+                // Initial update and set interval
+                updateDateTime();
+                setInterval(updateDateTime, 1000);
 
                 // Show loading state
                 loadingDiv.classList.add('active');
@@ -254,10 +283,8 @@
                         }, 5000);
                     }
 
-                    // Start animation
                     requestAnimationFrame(animate);
 
-                    // Save last visited section
                     localStorage.setItem('lastVisited', 'home');
                 } else {
                     mainElement.classList.remove('homepage');
@@ -266,17 +293,14 @@
                         <p>Bu sayfanın içeriği buraya gelecek.</p>
                     `;
 
-                    // Save last visited section
                     localStorage.setItem('lastVisited', window.location.pathname);
                 }
 
-                // Hide loading state and show content
                 setTimeout(() => {
                     loadingDiv.classList.remove('active');
                     fadeIn(mainElement);
                 }, 300);
 
-                // Cleanup function
                 function cleanup() {
                     if (animationFrameId) {
                         cancelAnimationFrame(animationFrameId);
@@ -284,12 +308,10 @@
                     }
                 }
 
-                // Clean up on page unload
                 window.addEventListener('unload', cleanup);
 
             } catch (error) {
                 console.error('Error initializing page:', error);
-                // Show error message to user
                 const errorDiv = document.createElement('div');
                 errorDiv.style.color = 'red';
                 errorDiv.textContent = 'Sayfa yüklenirken bir hata oluştu. Lütfen sayfayı yenileyin.';
@@ -297,7 +319,6 @@
             }
         });
 
-        // Add service worker for offline functionality
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
                 navigator.serviceWorker.register('/sw.js').catch(error => {
