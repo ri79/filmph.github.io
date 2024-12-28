@@ -186,7 +186,7 @@
             }, 500);
 
             if (window.location.pathname === '/' || window.location.pathname === '/index.html') {
-                const words = ['müzik', 'film', 'fotoğraf', 'kitap', 'link'];
+                const words = ['müzik', 'film', 'fotoğraf', 'kitap', ''];
                 let currentIndex = 0;
                 const changingWord = document.getElementById('changing-word');
 
@@ -199,7 +199,7 @@
                 updateWord();
 
                 // Kelimeleri değiştirmeye başla
-                setInterval(updateWord, 5000);
+                setInterval(updateWord, 2000);
             } else {
                 mainElement.classList.remove('homepage');
                 contentDiv.innerHTML = `
